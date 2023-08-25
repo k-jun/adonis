@@ -3,7 +3,7 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
 let path = "/socket.io"
 if (window.location.pathname !== '/') {
-  path = `${window.location.pathname}socket.io"`
+  path = `${window.location.pathname}socket.io`
 }
 const socket = io(window.location.origin, { path });
 
