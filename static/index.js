@@ -1,6 +1,11 @@
 import { h, text, app } from "https://unpkg.com/hyperapp";
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-const socket = io();
+
+let path = "/socket.io"
+if (window.location.pathname !== '/') {
+  path = `${window.location.pathname}/socket.io"`
+}
+const socket = io(window.location.origin, { path });
 
 const onFlip = (state, payload) => {
   console.log(payload);
@@ -51,7 +56,6 @@ const CardRow = (cards = [], users = []) => {
 };
 
 const onChange = (state, event) => {
-  console.log(event.target.value);
   socket.emit("rename", event.target.value);
   return { ...state, username: event.target.value };
 };
@@ -109,10 +113,9 @@ const dispatch = app({
           "button",
           { onclick: onSwitch },
           text(
-            `switch to ${
-              users.find((u) => u.id == socket.id)?.isMaster
-                ? "teammate"
-                : "spymaster"
+            `switch to ${users.find((u) => u.id == socket.id)?.isMaster
+              ? "teammate"
+              : "spymaster"
             }`
           )
         ),
@@ -162,7 +165,6 @@ const dispatch = app({
 });
 
 const Refresh = (state, payload) => {
-  console.log(payload);
   return { ...state, ...payload };
 };
 
