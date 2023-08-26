@@ -8,7 +8,6 @@ if (window.location.pathname !== '/') {
 const socket = io(window.location.origin, { path });
 
 const onFlip = (state, payload) => {
-  console.log(payload);
   socket.emit("flip", payload);
   return { ...state };
 };

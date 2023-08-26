@@ -27,16 +27,17 @@ export class Room {
   }
 
   refresh() {
+    const payload = {
+      cards: this.cards,
+      users: this.users.map((x) => ({
+        id: x.id,
+        name: x.name,
+        isMaster: x.isMaster,
+      })),
+      level: this.level,
+    };
+    
     for (let i = 0; i < this.users.length; i++) {
-      const payload = {
-        cards: this.cards,
-        users: this.users.map((x) => ({
-          id: x.id,
-          name: x.name,
-          isMaster: x.isMaster,
-        })),
-        level: this.level,
-      };
       this.users[i].socket.emit("refresh", payload);
     }
   }
