@@ -59,5 +59,5 @@ const handler = io.handler(async (req) => {
 });
 
 await serve(handler, {
-  port: 8080,
+  port: Deno.env.get("PORT"),
 });

@@ -1,9 +1,9 @@
-# Adonis Ramosa
+# Codename
 
 ## Run
 
 ```bash
-$ deno run --allow-net --allow-read src/main.js
+$ PORT='8080' deno run --allow-net --allow-read --allow-env src/main.js
 ```
 
 ## Test
